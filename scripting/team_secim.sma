@@ -97,10 +97,13 @@ GetSmallerTeam(const id)
 	if (inTeam)
 		count[cur]--;
 
-	if (count[TEAM_ID_T] < count[TEAM_ID_CT])
+	new numT  = count[TEAM_ID_T];
+	new numCT = count[TEAM_ID_CT];
+
+	if (numT < numCT)
 		return TEAM_ID_T;
 
-	if (count[TEAM_ID_CT] < count[TEAM_ID_T])
+	if (numCT < numT)
 		return TEAM_ID_CT;
 
 	if (inTeam)
@@ -162,9 +165,9 @@ ShowTeamMenu(const id)
 	}
 
 	/* jointeam komutu, oyuncunun menu durumu takim secimi degilse reddedilir. */
-	new state = _:get_member(id, m_iMenu);
+	new menuState = _:get_member(id, m_iMenu);
 
-	if (state != _:Menu_ChooseTeam && state != _:Menu_IGChooseTeam)
+	if (menuState != _:Menu_ChooseTeam && menuState != _:Menu_IGChooseTeam)
 		set_member(id, m_iMenu, joined ? Menu_IGChooseTeam : Menu_ChooseTeam);
 
 	show_menu(id, keys, menu, -1, MENU_ID);
